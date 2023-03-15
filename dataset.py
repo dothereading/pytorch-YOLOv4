@@ -265,7 +265,7 @@ class Yolo_dataset(Dataset):
 
     def __getitem__(self, index):
         img_path = list(self.truth.keys())[index]
-        bboxes = np.array(self.truth.get(img_path), dtype=np.float)
+        bboxes = np.array(self.truth.get(img_path), dtype=float)
         img_path = os.path.join(self.cfg.dataset_dir, img_path)
         use_mixup = self.cfg.mixup
         if random.randint(0, 1):
@@ -286,7 +286,7 @@ class Yolo_dataset(Dataset):
         for i in range(use_mixup + 1):
             if i != 0:
                 img_path = random.choice(list(self.truth.keys()))
-                bboxes = np.array(self.truth.get(img_path), dtype=np.float)
+                bboxes = np.array(self.truth.get(img_path), dtype=float)
                 img_path = os.path.join(self.cfg.dataset_dir, img_path)
             img = cv2.imread(img_path)
             if img is None:
@@ -381,7 +381,7 @@ class Yolo_dataset(Dataset):
         try:
             out_bboxes1[:min(out_bboxes.shape[0], self.cfg.boxes)] = out_bboxes[:min(out_bboxes.shape[0], self.cfg.boxes)]
         except AttributeError:
-            out_bboxes = np.array(out_bboxes.astype(object), dtype=np.float32)
+            out_bboxes = np.array(out_bboxes.astype(object), dtype=float32)
             out_bboxes1[:min(out_bboxes.shape[0], self.cfg.boxes)] = out_bboxes[:min(out_bboxes.shape[0], self.cfg.boxes)]
         return out_img, out_bboxes1
 
