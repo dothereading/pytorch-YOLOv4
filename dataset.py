@@ -395,6 +395,6 @@ if __name__ == "__main__":
     dataset = Yolo_dataset(Cfg.train_label, Cfg)
     for i in range(100):
         out_img, out_bboxes = dataset.__getitem__(i)
-        a = draw_box(out_img.copy(), out_bboxes.astype(np.int32))
-        plt.imshow(a.astype(np.int32))
+        a = draw_box(out_img.copy(), out_bboxes.astype(int32))
+        plt.imshow(a.astype(int32))
         plt.show()
